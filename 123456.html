@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>美照查询</title>
+    <style>
+        :root {
+            --primary-color: #3b82f6;  /* 主色调（蓝色） */
+            --hover-color: #2563eb;    /* 悬停加深色 */
+            --light-gray: #f3f4f6;     /* 浅灰色背景 */
+        }
+        body {
+            font-family: 'Inter', sans-serif;  /* 现代无衬线字体 */
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            text-align: center;
+            background-color: var(--light-gray);
+        }
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .input-group {
+            margin: 2rem 0;
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+        input {
+            padding: 0.8rem 1rem;
+            font-size: 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 0.5rem;
+            width: 200px;
+            transition: border-color 0.2s;
+        }
+        input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        button {
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        button:hover {
+            background-color: var(--hover-color);
+        }
+        img {
+            max-width: 100%;
+            border-radius: 0.75rem;  /* 比之前更圆润 */
+            margin-top: 1rem;
+            box-shadow: 0 8px 10px -2px rgba(0, 0, 0, 0.1);  /* 更立体的阴影 */
+            display: none; /* 初始隐藏图片 */
+        }
+        /* 移动设备适配 */
+        @media (max-width: 480px) {
+            .input-group {
+                flex-direction: column;
+            }
+            input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📸 美照查询</h1>
+        <div class="input-group">
+            <input type="text" id="keyword" placeholder="输入 'me' 查看美照">
+            <button onclick="showPhoto()">查询</button>
+        </div>
+        <img id="beautyImg" 
+             src="data:image/jpeg;base64,这里替换为你的图片Base64编码"  <!-- 关键：替换为实际图片的Base64 -->
+             alt="车内休闲美照">
+    </div>
+
+    <script>
+        function showPhoto() {
+            const input = document.getElementById('keyword').value.trim().toLowerCase();
+            const img = document.getElementById('beautyImg');
+            
+            if (input === 'me') {
+                img.style.display = 'block';
+                // 添加淡入动画
+                setTimeout(() => img.classList.add('fade-in'), 50);
+            } else {
+                alert('请输入正确指令（"me"）');
+                img.style.display = 'none';
+                img.classList.remove('fade-in');
+            }
+        }
+        // 淡入动画（增强视觉效果）
+        document.styleSheets[0].insertRule(`
+            .fade-in { 
+                animation: fadeIn 0.3s ease-in-out forwards; 
+            }
+            @keyframes fadeIn { 
+                from { opacity: 0; transform: scale(0.95); } 
+                to { opacity: 1; transform: scale(1); } 
+            }
+        `, 0);
+    </script>
+</body>
+</html>
+    
